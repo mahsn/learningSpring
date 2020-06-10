@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="students" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3247f960-8d23-47cf-be39-9801e161b7fb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Spring Project Collection"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="password" class="java.lang.String">
+		<fieldDescription><![CDATA[password]]></fieldDescription>
+	</field>
+	<field name="student_login" class="java.lang.String">
+		<fieldDescription><![CDATA[student_login]]></fieldDescription>
+	</field>
+	<field name="last_name" class="java.lang.String">
+		<fieldDescription><![CDATA[last_name]]></fieldDescription>
+	</field>
+	<field name="phones" class="java.util.List">
+		<fieldDescription><![CDATA[phones]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[first_name]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<variable name="student_login1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{student_login}]]></variableExpression>
+	</variable>
+	<variable name="student_login2" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{student_login}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="180" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="25" width="370" height="135" uuid="2045ffda-4e9d-4b97-b6b5-87267b7468bf">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial Black" size="26"/>
+				</textElement>
+				<text><![CDATA[     Students  Reports]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="120" width="130" height="20" uuid="94fdf83e-be8a-4b1d-ade7-b1de69da0f5b"/>
+				<textFieldExpression><![CDATA[$F{student_login}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="120" width="140" height="20" uuid="179779a2-5be1-4b16-b20e-fd8bc531fcbb"/>
+				<textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="80" width="130" height="20" uuid="c333eee9-8cb0-4bc4-956f-4956ea7564b8"/>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="80" width="140" height="20" uuid="6beb62db-36e4-45bf-a6ff-239937a1f30d"/>
+				<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

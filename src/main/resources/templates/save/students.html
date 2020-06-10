@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+    	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+ <!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<meta charset="ISO-8859-1">
+<style type="text/css">
+	table.striped>tbody>tr:nth-child(odd) {
+		background-color: rgba(158, 154, 154, 0.5);
+	}
+	
+	form input(type=submit) {
+		color:white;
+	}
+	
+	table {
+		width: 100%;
+	}
+	
+	table td, table th {
+		border: 1px solid grey;
+	}
+	
+	table th {
+		background: #eee;
+	}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+	 <div class="row">
+	 		<div th:each="m: ${msg}">
+	 			<span th:text="m"></span>
+	 		</div>
+		    <form action="savedata" method="post" class="col s12" th:object="${studentObj}" id="savedata" enctype="multipart/form-data">
+		      <div class="row">
+			      <div>
+				       <label>ID</label>
+				       <input name="id" th:field="*{id}" readonly="readonly">	
+			      </div>
+			       	<div class="input-field col s6">
+			          <input th:field="*{first_name}" required="required" placeholder="Student First Name" id="first_name" name="first_name" type="text" class="validate">
+			          <label for="first_name">Student First Name</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <input th:field="*{last_name}" required="required" id="last_name" type="text" name="last_name" class="validate">
+			          <label for="last_name">Student Last Name</label>
+			        </div>
+		      </div>
+		      <div class="row">
+			        <div class="input-field col s12">
+			          <input th:field="*{student_login}" required="required" id="student_login" type="text" name="student_login" class="validate">
+			          <label for="text">Student Login</label>
+			        </div>
+		      </div>
+		      <div class="row">
+			        <div class="input-field col s12">
+			          <input th:field="*{password}" required="required" id="password" type="text" name="password" class="validate">
+			          <label for="text">Password</label>
+			        </div>
+		      </div>
+		      <div class="row">
+			        <div class="input-field col s12">
+			          <input th:field="*{email}" required="required" id="email" type="email" name="email" class="validate">
+			          <label for="email">Student Email</label>
+			        </div>
+		      </div>
+		      <div class="input-field col s6">
+		      	<label for="student-gender" class="active">Graduation</label>
+		      	<select class="browser-default" th:field="*{graduationCourses}" id="graduationCourses">
+		      		<option th:each="p: ${graduationCourses}" th:value="${p.id}" th:text="${p.courseName}"></option>
+		      	</select>
+		      </div>
+		       <div class="row">
+			        <div class="input-field col s12">
+			         <label for="file" class="active">Upload File</label>	
+			          <input id="file" type="file" name="file" class="file-field input-field">
+			        </div>
+		      </div>
+		       <div class="input-field col s6">
+		      	<label for="student-levels" class="active">Levels</label>
+		      	<select class="browser-default" th:field="*{studentLevels}" id="studentLevels">
+		      		<option th:each="l: ${T(course.springboot.model.Levels).values()}" th:value="${l.value}" th:text="${l.name}"></option>
+		      	</select>
+		      </div>
+		      
+		      <div>
+		      	 <input class="waves-effect waves-light btn" type="submit" title="Save student" value="Submit">
+		      	 <a href="/liststudents" class="btn-floating btn-small waves-effect waves-light red" title="List all students"><i class="material-icons">list</i></a>    	
+		      </div>
+		    </form>
+	    </div>
+	  	<div class="row">
+	  		 <div class="input-field col s12">
+		    	<form action="search" method="post" id="search">
+		  			<input placeholder="Search By Name" id="first_name" name="first_name" type="text">
+		  			<input class="waves-effect waves-light btn"  type="submit" value="Search">
+		       		<input class="waves-effect waves-light btn" type="submit" title="Pdf Download" value="PDF" onclick="document.getElementById('search').method = 'get'">
+		       </form>
+		     </div>  		
+	    </div>
+	  <div class="row">
+	  		 <div class="input-field col s12"> 
+			  <table class="striped">
+			  		<tr>
+			  			<th>ID</th>
+					    <th>Firstname</th>
+					    <th>Lastname</th>
+					    <th>Login</th>
+					    <th>Download File</th>
+					    <th>Email</th>
+					    <th>Edit</th>
+					    <th>Remove</th>
+		  			</tr>
+				 	<tr th:each = "student: ${students}">
+						<td th:text = "${student.id}"></td>
+						<td>
+							<a th:href="@{/phones/{studentId}(studentId=${student.id})}" >
+								<span th:text = "${student.first_name}"></span>
+							</a>
+						</td>
+						<td th:text = "${student.last_name}"></td>
+						<td th:text = "${student.student_login}"></td>
+						<td>
+							<a th:if="${student.files != null}"th:href="@{/downloadfile/{studentId}(studentId=${student.id})}" title="Download file" class=" small material-icons">cloud_download</a>
+							<a th:if="${student.files == null}">Do not exist</a>
+						</td>
+						<td th:text = "${student.email}"></td>
+						<td>
+							<a th:href="@{/edit/{studentId}(studentId=${student.id})}" title="Edit" class=" small material-icons">edit</a>
+						</td>
+						<td>
+							<a th:href="@{/remove/{studentId}(studentId=${student.id})}" title="Remove" class=" small material-icons">clear</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>	
+		<div class="row" style="margin-top: 30px">
+			<center>
+				<th:block th:each="i: ${#numbers.sequence(0, students.totalPages - 1)}">
+					<a th:href="@{pageable(page=${i}, size=${students.size})}">[[ ${i} + 1]]</a>
+				</th:block>
+			</center>
+		</div>
+      <!-- Compiled and minified JavaScript -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

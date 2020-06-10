@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+    	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head >
+ <!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<meta charset="ISO-8859-1">
+</head>
+<body>
+	<div class="row">
+		<div th:each="m: ${msg}">
+			<span th:text="m"></span>
+	 	</div>
+	  	<div class="input-field col s12"> 
+			<div th:each="p: ${studentObj}">
+				<div class="row">
+					<p>ID: <span th:text="${p.id}"></span></p>
+					<p>First Name: <span th:text="${p.first_name}"></span></p>
+					<p>Last Name: <span th:text="${p.last_name}"></span></p>
+					<p>Student Login: <span th:text="${p.student_login}"></span></p>
+					<p>Student Email: <span th:text="${p.email}"></span></p>
+				</div>
+			</div>
+			<div class="row">
+				<form th:action="@{/phonesAdd/{studentId}(studentId=${studentObj.id})}" method="post" class="col s12">
+					<div class="row">
+						<div class="input-field col s6">
+							<label class="active" for="number">Phone Number</label>
+							<input id="phoneNumber" name="phoneNumber" class="validate">
+						</div>
+						<div class="input-field col s6">
+							<label class="active" for="type">Phone Type</label>
+							<input id="phoneType" name="phoneType" class="validate">
+						</div>
+						<div class="input-field col s6">
+						 	<input class="waves-effect waves-light btn" type="submit" title="Save Phones" value="Submit">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div>
+				<table class="striped">
+					<tr>
+						<th>ID</th>
+						<th>Phone Number</th>
+						<th>Phone Type</th>
+					</tr>
+					<tr th:each="phone: ${phones}">
+						<td th:text="${phone.id}"></td>
+						<td th:text="${phone.phoneNumber}"></td>
+						<td th:text="${phone.phoneType}"></td>
+						<td>
+							<a th:href="@{/removePhone/{phoneId}(phoneId=${phone.id})}" title="Remove" class=" small material-icons">clear</a>
+						</td>
+					</tr>		
+				</table>
+			</div>
+		</div>
+	</div>	
+      <!-- Compiled and minified JavaScript -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

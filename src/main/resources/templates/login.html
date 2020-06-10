@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+	form input[type=submit] {
+		color: white;
+		display: 
+	}
+	
+	form {
+		
+		margin-top: 11%;
+	}
+	
+	div.row {
+		margin-left: 35%;
+	}
+</style>
+</head>
+<body>
+		 <div class="row">
+		    <form th:action="@{/login}" method="post" class="col s12">
+			<h1>Access to System</h1>
+			  <div class="row">
+			        <div class="input-field col s6">
+			        <label for="text">Student Login</label>
+			          <input required="required" id="username" type="text" name="username" class="validate">
+			        </div>
+		      </div>
+		      <div class="row">
+			        <div class="input-field col s6">
+			         <label for="text">Password</label>
+			          <input required="required" id="password" type="password" name="password" class="validate">
+			        </div>
+		      </div>
+		        <div>
+		      	 <input class="waves-effect waves-light btn" type="submit" title="Save student" value="LOGIN">
+		      </div>
+		    </form>
+	    </div>
+	 
+        <!-- Compiled and minified JavaScript -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
